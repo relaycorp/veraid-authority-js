@@ -1,0 +1,59 @@
+{
+  "name": "@relaycorp/veraid-authority",
+  "version": "1.0.0",
+  "author": {
+    "email": "no-reply@relaycorp.tech",
+    "name": "Relaycorp, Inc.",
+    "url": "https://relaycorp.tech/"
+  },
+  "description": "Client library for the VeraId Authority API",
+  "type": "module",
+  "typings": "build/lib/index.d.ts",
+  "main": "build/lib/index.js",
+  "repository": "https://github.com/relaycorp/veraid-authority-js",
+  "homepage": "https://docs.relaycorp.tech/veraid-authority-js/",
+  "license": "MIT",
+  "keywords": [
+    "VeraId",
+    "Vera"
+  ],
+  "scripts": {
+    "build": "run-s clean tsc",
+    "fix": "run-s fix:*",
+    "fix:prettier": "prettier \"src/**/*.ts\" --write",
+    "fix:eslint": "eslint -c .eslintrc.cjs --fix src",
+    "static-checks": "run-p static-checks:*",
+    "static-checks:lint": "eslint -c .eslintrc.cjs src",
+    "static-checks:prettier": "prettier \"src/**/*.ts\" --list-different",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "test:integration": "exit 0",
+    "tsc": "tsc",
+    "doc-api": "typedoc src/index.ts --out build/docs",
+    "clean": "del-cli build test"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.4.3",
+    "@relaycorp/eslint-config": "^1.1.82",
+    "@relaycorp/shared-config": "^1.9.4",
+    "@types/jest": "^29.4.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "del-cli": "^5.0.0",
+    "eslint": "^8.37.0",
+    "jest": "^29.5.0",
+    "jest-date-mock": "^1.0.8",
+    "jest-extended": "^3.2.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.4",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typedoc": "^0.24.4",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+  },
+  "prettier": "@relaycorp/shared-config/.prettierrc.json",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}
