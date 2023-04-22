@@ -15,7 +15,13 @@ export class JsonDeserialiser<Type> extends Deserialiser<Type> {
       return undefined;
     }
 
-    const json = await response.json();
+    let json: Type;
+    try {
+      json = await response.json();
+    } catch {
+      // Malformed JSON
+      return undefined;
+    }
     const isValid = this.validator(json);
     return isValid ? json : undefined;
   }

@@ -57,5 +57,12 @@ describe('JsonDeserialiser', () => {
 
       await expect(deserialiser.deserialise(body)).resolves.toBeUndefined();
     });
+
+    test('Malformed value should return undefined', async () => {
+      const deserialiser = new JsonDeserialiser(validator);
+      const body = makeResponse(JSON_CONTENT_TYPE, '}');
+
+      await expect(deserialiser.deserialise(body)).resolves.toBeUndefined();
+    });
   });
 });
