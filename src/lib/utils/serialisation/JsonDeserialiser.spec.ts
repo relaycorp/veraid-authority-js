@@ -1,6 +1,6 @@
-import { compileSchema } from '../utils/jsonSchema.js';
-
+import { compileSchema } from './jsonSchema.js';
 import { JsonDeserialiser } from './JsonDeserialiser.js';
+import { SerialisationError } from './SerialisationError.js';
 
 const JSON_CONTENT_TYPE = 'application/json';
 
@@ -15,39 +15,35 @@ describe('JsonDeserialiser', () => {
   } as const);
 
   function makeResponse(contentType: string, body: BodyInit = JSON_BODY_STRING) {
-    const headers = new Headers();
-    headers.append('Content-Type', contentType);
+    const headers = new Headers([['Content-Type', contentType]]);
     return new Response(body, { headers });
   }
 
   describe('deserialise', () => {
     describe('Content type', () => {
-      test('application/json response should be deserialised', async () => {
+      test('application/json response should be allowed', async () => {
         const deserialiser = new JsonDeserialiser(validator);
         const body = makeResponse(JSON_CONTENT_TYPE);
 
         await expect(deserialiser.deserialise(body)).resolves.toMatchObject(JSON_BODY);
       });
 
-      test('application/json* response should be deserialised', async () => {
+      test('application/json* response should be allowed', async () => {
         const deserialiser = new JsonDeserialiser(validator);
         const body = makeResponse(`${JSON_CONTENT_TYPE}; charset=utf-8`);
 
         await expect(deserialiser.deserialise(body)).resolves.toMatchObject(JSON_BODY);
       });
 
-      test('Non-JSON response should not be deserialised', async () => {
+      test('Non-JSON response should be refused', async () => {
         const deserialiser = new JsonDeserialiser(validator);
-        const body = makeResponse('text/plain'); // Valid body, invalid content type
+        const contentType = 'text/plain';
+        const body = makeResponse(contentType); // Valid body, invalid content type
 
-        await expect(deserialiser.deserialise(body)).resolves.toBeUndefined();
-      });
-
-      test('Missing content type should not be deserialised', async () => {
-        const deserialiser = new JsonDeserialiser(validator);
-        const body = new Response(JSON_BODY_STRING);
-
-        await expect(deserialiser.deserialise(body)).resolves.toBeUndefined();
+        await expect(deserialiser.deserialise(body)).rejects.toThrowWithMessage(
+          SerialisationError,
+          `Unsupported content type (${contentType})`,
+        );
       });
     });
 
@@ -55,14 +51,20 @@ describe('JsonDeserialiser', () => {
       const deserialiser = new JsonDeserialiser(validator);
       const body = makeResponse(JSON_CONTENT_TYPE, '{}');
 
-      await expect(deserialiser.deserialise(body)).resolves.toBeUndefined();
+      await expect(deserialiser.deserialise(body)).rejects.toThrowWithMessage(
+        SerialisationError,
+        'Value did not match schema',
+      );
     });
 
     test('Malformed value should return undefined', async () => {
       const deserialiser = new JsonDeserialiser(validator);
       const body = makeResponse(JSON_CONTENT_TYPE, '}');
 
-      await expect(deserialiser.deserialise(body)).resolves.toBeUndefined();
+      await expect(deserialiser.deserialise(body)).rejects.toThrowWithMessage(
+        SerialisationError,
+        'Value is malformed JSON',
+      );
     });
   });
 });

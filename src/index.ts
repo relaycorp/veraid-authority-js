@@ -1,3 +1,4 @@
 /* eslint-disable import/no-unused-modules */
 
-export { JsonDeserialiser } from './lib/serialisation/JsonDeserialiser.js';
+export { AuthorityClient } from './lib/AuthorityClient.js';
+export type { AuthorizationHeader } from './lib/AuthorizationHeader.js';
