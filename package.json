@@ -29,7 +29,7 @@
     "test:integration": "exit 0",
     "tsc": "tsc",
     "doc-api": "typedoc src/index.ts --out build/docs",
-    "clean": "del-cli build test"
+    "clean": "del-cli build coverage"
   },
   "devDependencies": {
     "@jest/globals": "^29.4.3",

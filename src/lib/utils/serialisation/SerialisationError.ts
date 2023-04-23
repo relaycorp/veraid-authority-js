@@ -1,4 +1,4 @@
-import { AuthorityError } from '../../errors.js';
+import { AuthorityError } from '../../AuthorityError.js';
 
 /**
  * Problem serialising or deserialising data.

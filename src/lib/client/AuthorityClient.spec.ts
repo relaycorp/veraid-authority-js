@@ -1,13 +1,14 @@
 import { jest } from '@jest/globals';
 
-import { MockCommand } from '../testUtils/MockCommand.js';
-import { mockSpy } from '../testUtils/jest.js';
+import { MockCommand } from '../../testUtils/MockCommand.js';
+import { mockSpy } from '../../testUtils/jest.js';
+import type { PostRequest } from '../utils/requests.js';
+import { JsonValue } from '../utils/serialisation/JsonValue.js';
 
-import type { PostRequest } from './utils/requests.js';
-import { JsonValue } from './utils/serialisation/JsonValue.js';
 import { AuthorityClient } from './AuthorityClient.js';
 import type { AuthorizationHeader } from './AuthorizationHeader.js';
-import { ClientError, ServerError } from './errors.js';
+import { ServerError } from './ServerError.js';
+import { ClientError } from './ClientError.js';
 
 const mockFetch = mockSpy(jest.spyOn(global, 'fetch'));
 beforeEach(() => {

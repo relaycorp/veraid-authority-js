@@ -1,8 +1,10 @@
-import type { Command } from './commands/Command.js';
-import type { Request, RequestBody } from './utils/requests.js';
-import { ClientError, ServerError } from './errors.js';
+import type { Command } from '../commands/Command.js';
+import type { Request, RequestBody } from '../utils/requests.js';
+import { HTTP_STATUS_CODES } from '../utils/http.js';
+
+import { ServerError } from './ServerError.js';
 import type { AuthorizationHeader } from './AuthorizationHeader.js';
-import { HTTP_STATUS_CODES } from './utils/http.js';
+import { ClientError } from './ClientError.js';
 
 const USER_AGENT = 'VeraId Authority Client (https://github.com/relaycorp/veraid-authority-js)';
 const JSON_CONTENT_TYPE = 'application/json';
