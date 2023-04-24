@@ -1,3 +1,4 @@
 /* eslint-disable import/no-unused-modules */
 
-export { foo } from './lib/foo.js';
+export { AuthorityClient } from './lib/client/AuthorityClient.js';
+export type { AuthorizationHeader } from './lib/client/AuthorizationHeader.js';
