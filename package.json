@@ -27,7 +27,7 @@
     "static-checks:prettier": "prettier \"src/**/*.ts\" --list-different",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "test:integration": "exit 0",
-    "tsc": "tsc",
+    "tsc": "tsc --project tsconfig-build.json",
     "doc-api": "typedoc src/index.ts --out build/docs",
     "clean": "del-cli build coverage"
   },
