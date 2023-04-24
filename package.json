@@ -28,7 +28,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "test:integration": "exit 0",
     "tsc": "tsc --project tsconfig-build.json",
-    "doc-api": "typedoc src/index.ts --out build/docs",
+    "doc-api": "typedoc src/index.ts --out build/docs --tsconfig tsconfig-build.json",
     "clean": "del-cli build coverage"
   },
   "devDependencies": {
