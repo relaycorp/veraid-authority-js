@@ -49,16 +49,11 @@ describe('AuthorityClient', () => {
         expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}${request.path}`, expect.anything());
       });
 
-      test('Any trailing slash should be removed from the base URL', async () => {
-        const client = new AuthorityClient(`${baseUrl}/`, authHeader);
-
-        await client.send(new MockCommand(request));
-
-        expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}${request.path}`, expect.anything());
-      });
-
-      test('Any trailing slashes should be removed from the base URL', async () => {
-        const client = new AuthorityClient(`${baseUrl}//`, authHeader);
+      test.each([
+        ['slash', '/'],
+        ['slashes', '//'],
+      ])('Any trailing %s should be removed from the base URL', async (_type, suffix) => {
+        const client = new AuthorityClient(`${baseUrl}${suffix}`, authHeader);
 
         await client.send(new MockCommand(request));
 
