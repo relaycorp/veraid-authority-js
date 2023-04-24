@@ -58,7 +58,8 @@ export class AuthorityClient {
     response: Response,
     command: Command<unknown, CommandOutput, unknown>,
   ): Promise<CommandOutput> {
-    if (response.status === HTTP_STATUS_CODES.OK) {
+    const is2xxResponse = response.status < HTTP_STATUS_CODES.MULTIPLE_CHOICES;
+    if (is2xxResponse) {
       const responsePayload = await command.responseDeserialiser.deserialise(response);
       return command.getOutput(responsePayload);
     }
