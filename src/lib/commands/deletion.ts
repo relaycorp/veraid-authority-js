@@ -3,15 +3,11 @@ import type { DeleteRequest } from '../utils/requests.js';
 
 import { Command } from './Command.js';
 
-export interface DeletionInput {
-  endpoint: string;
-}
-
-export class DeletionCommand extends Command<DeletionInput, null, null> {
+export class DeletionCommand extends Command<string, null, null> {
   public responseDeserialiser = new NullDeserialiser();
 
   public getRequest(): DeleteRequest {
-    return { body: undefined, method: 'DELETE', path: this.input.endpoint };
+    return { body: undefined, method: 'DELETE', path: this.input };
   }
 
   public getOutput(): null {
