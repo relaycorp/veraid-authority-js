@@ -4,14 +4,14 @@ import type { DeleteRequest } from '../utils/requests.js';
 import { Command } from './Command.js';
 
 export interface OrgDeletionInput {
-  path: string;
+  endpoint: string;
 }
 
 export class OrgDeletionCommand extends Command<OrgDeletionInput, null, null> {
   public responseDeserialiser = new NullDeserialiser();
 
   public getRequest(): DeleteRequest {
-    return { body: undefined, method: 'DELETE', path: this.input.path };
+    return { body: undefined, method: 'DELETE', path: this.input.endpoint };
   }
 
   public getOutput(): null {

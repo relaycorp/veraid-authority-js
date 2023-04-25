@@ -2,7 +2,7 @@ import { NullDeserialiser } from '../utils/serialisation/NullDeserialiser.js';
 
 import { OrgDeletionCommand, type OrgDeletionInput } from './orgDeletion.js';
 
-const INPUT: OrgDeletionInput = { path: '/orgs/org-name' };
+const INPUT: OrgDeletionInput = { endpoint: '/orgs/org-name' };
 
 describe('OrgDeletionCommand', () => {
   test('Response deserialiser should be null deserialiser', () => {
@@ -28,12 +28,12 @@ describe('OrgDeletionCommand', () => {
       expect(contentType).toBeUndefined();
     });
 
-    test('Path should be that of input', () => {
+    test('Path should be that of endpoint', () => {
       const command = new OrgDeletionCommand(INPUT);
 
       const { path } = command.getRequest();
 
-      expect(path).toBe(INPUT.path);
+      expect(path).toBe(INPUT.endpoint);
     });
 
     test('Body should be undefined', () => {
