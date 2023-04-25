@@ -1,9 +1,9 @@
 import type { Deserialiser } from './Deserialiser.js';
 import { SerialisationError } from './SerialisationError.js';
 
-const JSON_CONTENT_TYPE = 'application/json';
-
 type SchemaValidator<Type> = (data: unknown) => data is Type;
+
+export const JSON_CONTENT_TYPE = 'application/json';
 
 export class JsonDeserialiser<Type> implements Deserialiser<Type> {
   public constructor(protected readonly validator: SchemaValidator<Type>) {}
