@@ -13,3 +13,7 @@ export interface Request<Body extends RequestBody> {
 export interface PostRequest extends Request<SerialisableValue> {
   method: 'POST';
 }
+
+export interface DeleteRequest extends Request<undefined> {
+  method: 'DELETE';
+}
