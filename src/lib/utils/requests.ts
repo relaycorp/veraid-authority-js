@@ -14,6 +14,10 @@ export interface PostRequest extends Request<SerialisableValue> {
   method: 'POST';
 }
 
+export interface GetRequest extends Request<undefined> {
+  method: 'GET';
+}
+
 export interface DeleteRequest extends Request<undefined> {
   method: 'DELETE';
 }

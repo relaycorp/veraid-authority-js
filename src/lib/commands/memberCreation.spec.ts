@@ -27,8 +27,8 @@ describe('MemberCreationCommand', () => {
       '%s URL path should be returned',
       async (pathName) => {
         const command = new MemberCreationCommand(INPUT);
-        const output = { ...OUTPUT, [pathName]: undefined };
-        const response = makeJsonResponse(output);
+        const responseBody = { ...OUTPUT, [pathName]: undefined };
+        const response = makeJsonResponse(responseBody);
 
         await expect(command.responseDeserialiser.deserialise(response)).rejects.toThrow(
           SerialisationError,

@@ -7,3 +7,4 @@ export * from './lib/commands/orgCreation.js';
 export * from './lib/commands/orgDeletion.js';
 
 export * from './lib/commands/memberCreation.js';
+export * from './lib/commands/memberRetrieval.js';
