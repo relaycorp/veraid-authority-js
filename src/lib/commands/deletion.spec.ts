@@ -1,19 +1,19 @@
 import { NullDeserialiser } from '../utils/serialisation/NullDeserialiser.js';
 
-import { OrgDeletionCommand, type OrgDeletionInput } from './orgDeletion.js';
+import { DeletionCommand, type DeletionInput } from './deletion.js';
 
-const INPUT: OrgDeletionInput = { endpoint: '/orgs/org-name' };
+const INPUT: DeletionInput = { endpoint: '/orgs/org-name' };
 
-describe('OrgDeletionCommand', () => {
+describe('DeletionCommand', () => {
   test('Response deserialiser should be null deserialiser', () => {
-    const command = new OrgDeletionCommand(INPUT);
+    const command = new DeletionCommand(INPUT);
 
     expect(command.responseDeserialiser).toBeInstanceOf(NullDeserialiser);
   });
 
   describe('getRequest', () => {
     test('Method should be DELETE', () => {
-      const command = new OrgDeletionCommand(INPUT);
+      const command = new DeletionCommand(INPUT);
 
       const { method } = command.getRequest();
 
@@ -21,7 +21,7 @@ describe('OrgDeletionCommand', () => {
     });
 
     test('Content type should be undefined', () => {
-      const command = new OrgDeletionCommand(INPUT);
+      const command = new DeletionCommand(INPUT);
 
       const { contentType } = command.getRequest();
 
@@ -29,7 +29,7 @@ describe('OrgDeletionCommand', () => {
     });
 
     test('Path should be that of endpoint', () => {
-      const command = new OrgDeletionCommand(INPUT);
+      const command = new DeletionCommand(INPUT);
 
       const { path } = command.getRequest();
 
@@ -37,7 +37,7 @@ describe('OrgDeletionCommand', () => {
     });
 
     test('Body should be undefined', () => {
-      const command = new OrgDeletionCommand(INPUT);
+      const command = new DeletionCommand(INPUT);
 
       const { body } = command.getRequest();
 
@@ -46,7 +46,7 @@ describe('OrgDeletionCommand', () => {
   });
 
   test('Output should be null', () => {
-    const command = new OrgDeletionCommand(INPUT);
+    const command = new DeletionCommand(INPUT);
 
     const output = command.getOutput();
 
