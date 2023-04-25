@@ -9,4 +9,6 @@ export * from './lib/commands/members/memberCreation.js';
 export * from './lib/commands/members/memberRetrieval.js';
 export * from './lib/commands/members/memberUpdate.js';
 
+export * from './lib/commands/memberPublicKeys/keyImport.js';
+
 export * from './lib/commands/DeletionCommand.js';
