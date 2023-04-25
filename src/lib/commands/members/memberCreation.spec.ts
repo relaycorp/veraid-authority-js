@@ -1,8 +1,8 @@
-import { MEMBER_EMAIL, ORG_NAME, USER_NAME } from '../../testUtils/stubs.js';
-import { MemberRole } from '../apiTypes/MemberRole.js';
-import { getJsonValue, makeJsonResponse } from '../../testUtils/jsonSerialisation.js';
-import { SerialisationError } from '../utils/serialisation/SerialisationError.js';
+import { MEMBER_EMAIL, ORG_NAME, USER_NAME } from '../../../testUtils/stubs.js';
+import { getJsonValue, makeJsonResponse } from '../../../testUtils/jsonSerialisation.js';
+import { SerialisationError } from '../../utils/serialisation/SerialisationError.js';
 
+import { MemberRole } from './MemberRole.js';
 import {
   MemberCreationCommand,
   type MemberCreationInput,

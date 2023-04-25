@@ -1,9 +1,8 @@
-import { JsonValue } from '../utils/serialisation/JsonValue.js';
-import { JsonDeserialiser } from '../utils/serialisation/JsonDeserialiser.js';
-import { compileSchema } from '../utils/serialisation/jsonSchema.js';
-import type { PostRequest } from '../utils/http.js';
-
-import { Command } from './Command.js';
+import { JsonValue } from '../../utils/serialisation/JsonValue.js';
+import { JsonDeserialiser } from '../../utils/serialisation/JsonDeserialiser.js';
+import { compileSchema } from '../../utils/serialisation/jsonSchema.js';
+import type { PostRequest } from '../../utils/http.js';
+import { Command } from '../Command.js';
 
 const VALIDATOR = compileSchema({
   type: 'object',

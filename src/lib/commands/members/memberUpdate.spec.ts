@@ -1,8 +1,8 @@
-import { MemberRole } from '../apiTypes/MemberRole.js';
-import { NullDeserialiser } from '../utils/serialisation/NullDeserialiser.js';
-import { MEMBER_EMAIL, USER_NAME } from '../../testUtils/stubs.js';
-import { getJsonValue } from '../../testUtils/jsonSerialisation.js';
+import { NullDeserialiser } from '../../utils/serialisation/NullDeserialiser.js';
+import { MEMBER_EMAIL, USER_NAME } from '../../../testUtils/stubs.js';
+import { getJsonValue } from '../../../testUtils/jsonSerialisation.js';
 
+import { MemberRole } from './MemberRole.js';
 import { MemberUpdateCommand, type MemberUpdateInput } from './memberUpdate.js';
 
 const INPUT: MemberUpdateInput = {

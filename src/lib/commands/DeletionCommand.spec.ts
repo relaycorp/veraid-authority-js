@@ -1,6 +1,6 @@
 import { NullDeserialiser } from '../utils/serialisation/NullDeserialiser.js';
 
-import { DeletionCommand } from './deletion.js';
+import { DeletionCommand } from './DeletionCommand.js';
 
 const INPUT = '/orgs/org-name';
 

@@ -1,12 +1,12 @@
 import type { FromSchema } from 'json-schema-to-ts';
 
-import type { MemberRole } from '../apiTypes/MemberRole.js';
-import { compileSchema } from '../utils/serialisation/jsonSchema.js';
-import { JsonDeserialiser } from '../utils/serialisation/JsonDeserialiser.js';
-import { JsonValue } from '../utils/serialisation/JsonValue.js';
-import type { PostRequest } from '../utils/http.js';
+import { compileSchema } from '../../utils/serialisation/jsonSchema.js';
+import { JsonDeserialiser } from '../../utils/serialisation/JsonDeserialiser.js';
+import { JsonValue } from '../../utils/serialisation/JsonValue.js';
+import type { PostRequest } from '../../utils/http.js';
+import { Command } from '../Command.js';
 
-import { Command } from './Command.js';
+import type { MemberRole } from './MemberRole.js';
 
 const RESPONSE_SCHEMA = {
   type: 'object',
