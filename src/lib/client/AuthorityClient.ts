@@ -1,6 +1,5 @@
 import type { Command } from '../commands/Command.js';
-import type { Request, RequestBody } from '../utils/requests.js';
-import { HTTP_STATUS_CODES } from '../utils/http.js';
+import { HTTP_STATUS_CODES, type Request, type RequestBody } from '../utils/http.js';
 
 import { ServerError } from './ServerError.js';
 import type { AuthorizationHeader } from './AuthorizationHeader.js';

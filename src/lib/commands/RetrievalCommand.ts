@@ -1,4 +1,4 @@
-import type { GetRequest } from '../utils/requests.js';
+import type { GetRequest } from '../utils/http.js';
 
 import { Command } from './Command.js';
 

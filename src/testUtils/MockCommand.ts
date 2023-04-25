@@ -1,5 +1,5 @@
 import { Command } from '../lib/commands/Command.js';
-import type { Request, RequestBody } from '../lib/utils/requests.js';
+import type { Request, RequestBody } from '../lib/utils/http.js';
 
 export class MockCommand<ReqBody extends RequestBody> extends Command<ReqBody, unknown, unknown> {
   public responseDeserialiser = {

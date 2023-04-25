@@ -1,5 +1,5 @@
-import type { Request, RequestBody } from '../utils/requests.js';
 import type { Deserialiser } from '../utils/serialisation/Deserialiser.js';
+import type { Request, RequestBody } from '../utils/http.js';
 
 export abstract class Command<CommandInput, CommandOutput, ResponseBodyType> {
   public abstract responseDeserialiser: Deserialiser<ResponseBodyType>;
