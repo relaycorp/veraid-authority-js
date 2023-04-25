@@ -1,5 +1,5 @@
 import { NullDeserialiser } from '../utils/serialisation/NullDeserialiser.js';
-import type { DeleteRequest } from '../utils/requests.js';
+import type { DeleteRequest } from '../utils/http.js';
 
 import { Command } from './Command.js';
 

@@ -2,8 +2,8 @@ import { jest } from '@jest/globals';
 
 import { MockCommand } from '../../testUtils/MockCommand.js';
 import { mockSpy } from '../../testUtils/jest.js';
-import type { PostRequest } from '../utils/requests.js';
 import { JsonValue } from '../utils/serialisation/JsonValue.js';
+import type { PostRequest } from '../utils/http.js';
 
 import { AuthorityClient } from './AuthorityClient.js';
 import type { AuthorizationHeader } from './AuthorizationHeader.js';
