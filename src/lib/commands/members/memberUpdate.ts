@@ -1,9 +1,9 @@
-import type { MemberRole } from '../apiTypes/MemberRole.js';
-import { JsonValue } from '../utils/serialisation/JsonValue.js';
-import { NullDeserialiser } from '../utils/serialisation/NullDeserialiser.js';
-import type { PatchRequest } from '../utils/http.js';
+import { JsonValue } from '../../utils/serialisation/JsonValue.js';
+import { NullDeserialiser } from '../../utils/serialisation/NullDeserialiser.js';
+import type { PatchRequest } from '../../utils/http.js';
+import { Command } from '../Command.js';
 
-import { Command } from './Command.js';
+import type { MemberRole } from './MemberRole.js';
 
 export interface MemberUpdateInput {
   readonly endpoint: string;

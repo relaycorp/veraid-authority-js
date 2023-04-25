@@ -1,10 +1,10 @@
 import type { FromSchema } from 'json-schema-to-ts';
 
-import type { MemberRole } from '../apiTypes/MemberRole.js';
-import { compileSchema } from '../utils/serialisation/jsonSchema.js';
-import { JsonDeserialiser } from '../utils/serialisation/JsonDeserialiser.js';
+import { compileSchema } from '../../utils/serialisation/jsonSchema.js';
+import { JsonDeserialiser } from '../../utils/serialisation/JsonDeserialiser.js';
+import { RetrievalCommand } from '../RetrievalCommand.js';
 
-import { RetrievalCommand } from './RetrievalCommand.js';
+import type { MemberRole } from './MemberRole.js';
 
 const RESPONSE_SCHEMA = {
   type: 'object',

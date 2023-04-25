@@ -1,8 +1,8 @@
-import { SerialisationError } from '../utils/serialisation/SerialisationError.js';
-import { MEMBER_EMAIL, ORG_NAME, USER_NAME } from '../../testUtils/stubs.js';
-import { makeJsonResponse } from '../../testUtils/jsonSerialisation.js';
-import { MemberRole } from '../apiTypes/MemberRole.js';
+import { SerialisationError } from '../../utils/serialisation/SerialisationError.js';
+import { MEMBER_EMAIL, ORG_NAME, USER_NAME } from '../../../testUtils/stubs.js';
+import { makeJsonResponse } from '../../../testUtils/jsonSerialisation.js';
 
+import { MemberRole } from './MemberRole.js';
 import { MemberRetrievalCommand, type MemberRetrievalOutput } from './memberRetrieval.js';
 
 const INPUT = `/orgs/${ORG_NAME}/members/foo`;

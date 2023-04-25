@@ -1,6 +1,6 @@
-import { getJsonValue, makeJsonResponse } from '../../testUtils/jsonSerialisation.js';
-import { ORG_NAME } from '../../testUtils/stubs.js';
-import { SerialisationError } from '../utils/serialisation/SerialisationError.js';
+import { getJsonValue, makeJsonResponse } from '../../../testUtils/jsonSerialisation.js';
+import { ORG_NAME } from '../../../testUtils/stubs.js';
+import { SerialisationError } from '../../utils/serialisation/SerialisationError.js';
 
 import {
   OrgCreationCommand,
