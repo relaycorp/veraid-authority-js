@@ -8,6 +8,7 @@ export * from './lib/commands/orgs/orgCreation.js';
 export * from './lib/commands/members/memberCreation.js';
 export * from './lib/commands/members/memberRetrieval.js';
 export * from './lib/commands/members/memberUpdate.js';
+export type { MemberRole } from './lib/commands/members/MemberRole.js';
 
 export * from './lib/commands/memberPublicKeys/keyImport.js';
 
