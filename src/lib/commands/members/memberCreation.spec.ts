@@ -17,13 +17,14 @@ const INPUT: MemberCreationInput = {
 const OUTPUT: MemberCreationOutput = {
   self: `/orgs/${ORG_NAME}/members/${USER_NAME}`,
   publicKeys: `/orgs/${ORG_NAME}/members/${USER_NAME}/publicKeys`,
+  publicKeyImportTokens: `/orgs/${ORG_NAME}/members/${USER_NAME}/publicKeyImportTokens`,
 };
 
 type MemberCreationRequestBody = Omit<MemberCreationInput, 'endpoint'>;
 
 describe('MemberCreationCommand', () => {
   describe('responseDeserialiser', () => {
-    test.each<keyof typeof OUTPUT>(['self', 'publicKeys'])(
+    test.each<keyof MemberCreationOutput>(['self', 'publicKeys', 'publicKeyImportTokens'])(
       '%s URL path should be returned',
       async (pathName) => {
         const command = new MemberCreationCommand(INPUT);

@@ -10,8 +10,14 @@ import type { MemberRole } from './MemberRole.js';
 
 const RESPONSE_SCHEMA = {
   type: 'object',
-  properties: { self: { type: 'string' }, publicKeys: { type: 'string' } },
-  required: ['self', 'publicKeys'],
+
+  properties: {
+    self: { type: 'string' },
+    publicKeys: { type: 'string' },
+    publicKeyImportTokens: { type: 'string' },
+  },
+
+  required: ['self', 'publicKeys', 'publicKeyImportTokens'],
 } as const;
 const RESPONSE_VALIDATOR = compileSchema(RESPONSE_SCHEMA);
 
