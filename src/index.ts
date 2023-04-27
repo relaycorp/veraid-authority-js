@@ -13,5 +13,6 @@ export * from './lib/commands/members/memberUpdate.js';
 export { MemberRole } from './lib/commands/members/MemberRole.js';
 
 export * from './lib/commands/memberPublicKeys/keyImport.js';
+export * from './lib/commands/memberKeyImportTokens/tokenCreation.js';
 
 export * from './lib/commands/DeletionCommand.js';
