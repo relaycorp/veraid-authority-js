@@ -2,12 +2,11 @@ import { JsonValue } from '../../utils/serialisation/JsonValue.js';
 import { NullDeserialiser } from '../../utils/serialisation/NullDeserialiser.js';
 import type { PatchRequest } from '../../utils/http.js';
 import { Command } from '../Command.js';
+import type { EndpointInput } from '../EndpointInput.js';
 
 import type { MemberRole } from './MemberRole.js';
 
-export interface MemberUpdateInput {
-  readonly endpoint: string;
-
+export interface MemberUpdateInput extends EndpointInput {
   readonly name?: string | null;
   readonly email?: string | null;
   readonly role?: MemberRole;
