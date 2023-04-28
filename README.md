@@ -25,7 +25,10 @@ import type { AuthorizationHeader } from '@relaycorp/veraid-authority';
 
 const AUTH_ENDPOINT_URL = 'https://auth.example.com/oauth2/token';
 
-export async function authenticate(client: string, password: string): Promise<AuthorizationHeader> {
+export async function authenticate(
+  client: string,
+  password: string,
+): Promise<AuthorizationHeader> {
   const body = {
     grant_type: 'client_credentials',
     client_id: client,
@@ -54,8 +57,11 @@ import { AuthorityClient } from '@relaycorp/veraid-authority';
 const API_URL = 'https://veraid-authority.example.com';
 
 export async function makeClient(): Promise<AuthorityClient> {
-  const authHeader = await authenticate(process.env.AUTHORITY_CLIENT_ID, process.env.AUTHORITY_CLIENT_PASSWORD);
-  return new AuthorityClient(API_URL, authHeader);
+  const auth = await authenticate(
+    process.env.AUTHORITY_CLIENT_ID,
+    process.env.AUTHORITY_CLIENT_PASSWORD,
+  );
+  return new AuthorityClient(API_URL, auth);
 }
 ```
 
