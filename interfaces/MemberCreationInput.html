@@ -15,12 +15,17 @@
 <li><a href="../modules.html">@relaycorp/veraid-authority</a></li>
 <li><a href="MemberCreationInput.html">MemberCreationInput</a></li></ul>
 <h1>Interface MemberCreationInput</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>Input to the <a href="../classes/MemberCreationCommand.html" class="tsd-kind-class">MemberCreationCommand</a>.</p>
+</div></section>
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
-<li><span class="target">MemberCreationInput</span></li></ul></section><aside class="tsd-sources">
+<li><span class="tsd-signature-type ">EndpointInput</span>
+<ul class="tsd-hierarchy">
+<li><span class="target">MemberCreationInput</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/05459ed/src/lib/commands/members/memberCreation.ts#L24">src/lib/commands/members/memberCreation.ts:24</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/c88f39d/src/lib/commands/members/memberCreation.ts#L29">src/lib/commands/members/memberCreation.ts:29</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -29,7 +34,7 @@
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
 <div class="tsd-index-list"><a href="MemberCreationInput.html#email" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF984D" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-1024-path"></rect><path d="M9.354 16V7.24H12.174C12.99 7.24 13.638 7.476 14.118 7.948C14.606 8.412 14.85 9.036 14.85 9.82C14.85 10.604 14.606 11.232 14.118 11.704C13.638 12.168 12.99 12.4 12.174 12.4H10.434V16H9.354ZM10.434 11.428H12.174C12.646 11.428 13.022 11.284 13.302 10.996C13.59 10.7 13.734 10.308 13.734 9.82C13.734 9.324 13.59 8.932 13.302 8.644C13.022 8.356 12.646 8.212 12.174 8.212H10.434V11.428Z" fill="var(--color-text)" id="icon-1024-text"></path></svg><span>email?</span></a>
-<a href="MemberCreationInput.html#endpoint" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>endpoint</span></a>
+<a href="MemberCreationInput.html#endpoint" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>endpoint</span></a>
 <a href="MemberCreationInput.html#name" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>name?</span></a>
 <a href="MemberCreationInput.html#role" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>role</span></a>
 </div></section></div></details></section></section>
@@ -37,24 +42,34 @@
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member"><a id="email" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>email</span><a href="#email" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">email</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">email</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The email address of the member, if they should be allowed to access the API.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/05459ed/src/lib/commands/members/memberCreation.ts#L28">src/lib/commands/members/memberCreation.ts:28</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member"><a id="endpoint" class="tsd-anchor"></a>
+<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/c88f39d/src/lib/commands/members/memberCreation.ts#L40">src/lib/commands/members/memberCreation.ts:40</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited"><a id="endpoint" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>endpoint</span><a href="#endpoint" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">endpoint</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">endpoint</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The endpoint to send the request to.</p>
+</div><aside class="tsd-sources">
+<p>Inherited from EndpointInput.endpoint</p>
 <ul>
-<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/05459ed/src/lib/commands/members/memberCreation.ts#L25">src/lib/commands/members/memberCreation.ts:25</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/c88f39d/src/lib/commands/EndpointInput.ts#L5">src/lib/commands/EndpointInput.ts:5</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="name" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>name</span><a href="#name" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The name of the member, if they&#39;re a user.</p>
+<p>Leave <code>undefined</code> if the member is a bot.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/05459ed/src/lib/commands/members/memberCreation.ts#L27">src/lib/commands/members/memberCreation.ts:27</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/c88f39d/src/lib/commands/members/memberCreation.ts#L35">src/lib/commands/members/memberCreation.ts:35</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="role" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>role</span><a href="#role" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">role</span><span class="tsd-signature-symbol">:</span> <a href="../enums/MemberRole.html" class="tsd-signature-type tsd-kind-enum">MemberRole</a></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">role</span><span class="tsd-signature-symbol">:</span> <a href="../enums/MemberRole.html" class="tsd-signature-type tsd-kind-enum">MemberRole</a></div>
+<div class="tsd-comment tsd-typography"><p>The role of the member.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/05459ed/src/lib/commands/members/memberCreation.ts#L29">src/lib/commands/members/memberCreation.ts:29</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/relaycorp/veraid-authority-js/blob/c88f39d/src/lib/commands/members/memberCreation.ts#L45">src/lib/commands/members/memberCreation.ts:45</a></li></ul></aside></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -73,7 +88,7 @@
 <div class="tsd-accordion-details">
 <ul>
 <li><a href="#email" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>email</span></a></li>
-<li><a href="#endpoint" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>endpoint</span></a></li>
+<li><a href="#endpoint" class="tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>endpoint</span></a></li>
 <li><a href="#name" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>name</span></a></li>
 <li><a href="#role" class=""><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>role</span></a></li></ul></div></details></div>
 <div class="site-menu">
@@ -92,15 +107,15 @@
 <li><a href="../classes/ServerError.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Server<wbr/>Error</span></a></li>
 <li><a href="AuthorizationHeader.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-256-path"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)" id="icon-256-text"></path></svg><span>Authorization<wbr/>Header</span></a></li>
 <li><a href="MemberCreationInput.html" class="current"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Member<wbr/>Creation<wbr/>Input</span></a></li>
+<li><a href="MemberCreationOutput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Member<wbr/>Creation<wbr/>Output</span></a></li>
 <li><a href="MemberKeyImportTokenInput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Member<wbr/>Key<wbr/>Import<wbr/>Token<wbr/>Input</span></a></li>
+<li><a href="MemberKeyImportTokenOutput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Member<wbr/>Key<wbr/>Import<wbr/>Token<wbr/>Output</span></a></li>
 <li><a href="MemberPublicKeyImportInput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Member<wbr/>Public<wbr/>Key<wbr/>Import<wbr/>Input</span></a></li>
+<li><a href="MemberPublicKeyImportOutput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Member<wbr/>Public<wbr/>Key<wbr/>Import<wbr/>Output</span></a></li>
 <li><a href="MemberRetrievalOutput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Member<wbr/>Retrieval<wbr/>Output</span></a></li>
 <li><a href="MemberUpdateInput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Member<wbr/>Update<wbr/>Input</span></a></li>
 <li><a href="OrgCreationInput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Org<wbr/>Creation<wbr/>Input</span></a></li>
-<li><a href="OrgCreationOutput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Org<wbr/>Creation<wbr/>Output</span></a></li>
-<li><a href="../types/MemberCreationOutput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-type-alias)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-4194304-path"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)" id="icon-4194304-text"></path></svg><span>Member<wbr/>Creation<wbr/>Output</span></a></li>
-<li><a href="../types/MemberKeyImportTokenOutput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg><span>Member<wbr/>Key<wbr/>Import<wbr/>Token<wbr/>Output</span></a></li>
-<li><a href="../types/MemberPublicKeyImportOutput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg><span>Member<wbr/>Public<wbr/>Key<wbr/>Import<wbr/>Output</span></a></li></ul></nav></div></div></div>
+<li><a href="OrgCreationOutput.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Org<wbr/>Creation<wbr/>Output</span></a></li></ul></nav></div></div></div>
 <div class="tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
 <div class="overlay"></div></body></html>
