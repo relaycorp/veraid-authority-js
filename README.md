@@ -99,6 +99,8 @@ export async function createAndDeleteOrg(name: string, client: AuthorityClient):
 }
 ```
 
+An error will be thrown if the command failed for whatever reason.
+
 For detailed documentation on all the commands we support, please refer to the API documentation of this library.
 
 ## API Documentation
