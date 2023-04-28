@@ -13,11 +13,18 @@ interface BadRequestResponseBody {
   message?: string;
 }
 
+/**
+ * Client for the VeraId Authority API.
+ */
 export class AuthorityClient {
   protected readonly baseUrl: string;
 
   protected readonly authHeader: string;
 
+  /**
+   * @param baseUrl The base URL of the Authority server.
+   * @param authHeader The `Authorization` header parameters.
+   */
   public constructor(baseUrl: string, authHeader: AuthorizationHeader) {
     // eslint-disable-next-line regexp/no-super-linear-move
     this.baseUrl = baseUrl.replace(/\/+$/u, '');

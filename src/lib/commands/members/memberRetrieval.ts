@@ -25,10 +25,21 @@ const RESPONSE_VALIDATOR = compileSchema(RESPONSE_SCHEMA);
 
 type ResponseSchema = FromSchema<typeof RESPONSE_SCHEMA>;
 
+/**
+ * Output from the {@link MemberRetrievalCommand}.
+ * @property {string} name The name of the member, if they're a user.
+ * @property {string} email The email address of the member.
+ * @property {MemberRole} role The role of the member.
+ * @category Member retrieval
+ */
 export interface MemberRetrievalOutput extends ResponseSchema {
   readonly role: MemberRole;
 }
 
+/**
+ * Command to retrieve a member.
+ * @category Member retrieval
+ */
 export class MemberRetrievalCommand extends RetrievalCommand<
   MemberRetrievalOutput,
   ResponseSchema

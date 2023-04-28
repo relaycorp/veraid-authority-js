@@ -2,5 +2,7 @@
   "exclude": ["**/*.spec.ts"],
   "excludePrivate": true,
   "excludeProtected": true,
-  "theme": "default"
+  "theme": "default",
+  "emit": "docs",
+  "categorizeByGroup": false
 }
