@@ -10,15 +10,37 @@ const VALIDATOR = compileSchema({
   required: ['self', 'members'],
 } as const);
 
+/**
+ * Input to the {@link OrgCreationCommand}.
+ * @category Org creation
+ */
 export interface OrgCreationInput {
+  /**
+   * Name of the organisation (i.e., its domain name).
+   */
   name: string;
 }
 
+/**
+ * Output from the {@link OrgCreationCommand}.
+ * @category Org creation
+ */
 export interface OrgCreationOutput {
+  /**
+   * Path to the newly-created organisation.
+   */
   self: string;
+
+  /**
+   * Path to the newly-created organisation's members.
+   */
   members: string;
 }
 
+/**
+ * Command to create a new organisation.
+ * @category Org creation
+ */
 export class OrgCreationCommand extends Command<
   OrgCreationInput,
   OrgCreationOutput,
