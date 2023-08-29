@@ -16,3 +16,18 @@ export function mockSpy<
 
   return spy;
 }
+
+export async function getPromiseRejection<ErrorType extends Error>(
+  rejectingFunction: () => Promise<unknown>,
+  expectedErrorType: new (...args: any[]) => ErrorType,
+): Promise<ErrorType> {
+  let error: ErrorType | undefined;
+  try {
+    await rejectingFunction();
+  } catch (err) {
+    error = err as ErrorType;
+  }
+
+  expect(error).toBeInstanceOf(expectedErrorType);
+  return error!;
+}

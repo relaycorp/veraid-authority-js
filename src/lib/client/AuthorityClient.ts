@@ -73,15 +73,15 @@ export class AuthorityClient {
     if (response.status === HTTP_STATUS_CODES.BAD_REQUEST) {
       const errorPayload = (await response.json()) as BadRequestResponseBody;
       const reason = errorPayload.type ?? errorPayload.message ?? '(no reason provided)';
-      throw new ClientError(`Server refused request as invalid: ${reason}`);
+      throw new ClientError(`Server refused request as invalid: ${reason}`, response.status);
     }
 
     if (response.status === HTTP_STATUS_CODES.UNAUTHORIZED) {
-      throw new ClientError('Server refused access token');
+      throw new ClientError('Server refused access token', response.status);
     }
 
     if (response.status === HTTP_STATUS_CODES.FORBIDDEN) {
-      throw new ClientError('Server denied authorisation');
+      throw new ClientError('Server denied authorisation', response.status);
     }
 
     throw new ServerError(`Unsupported status code (${response.status})`);
