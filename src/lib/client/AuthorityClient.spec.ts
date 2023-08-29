@@ -1,9 +1,9 @@
 import { jest } from '@jest/globals';
 
 import { MockCommand } from '../../testUtils/MockCommand.js';
-import { mockSpy } from '../../testUtils/jest.js';
+import { getPromiseRejection, mockSpy } from '../../testUtils/jest.js';
 import { JsonValue } from '../utils/serialisation/JsonValue.js';
-import type { PostRequest } from '../utils/http.js';
+import { type PostRequest, HTTP_STATUS_CODES } from '../utils/http.js';
 
 import { AuthorityClient } from './AuthorityClient.js';
 import type { AuthorizationHeader } from './AuthorizationHeader.js';
@@ -168,10 +168,13 @@ describe('AuthorityClient', () => {
           const client = new AuthorityClient(baseUrl, authHeader);
           mockFetch.mockResolvedValue(new Response('{}', { status: 400 }));
 
-          await expect(client.send(new MockCommand(request))).rejects.toThrowWithMessage(
+          const error = await getPromiseRejection(
+            async () => client.send(new MockCommand(request)),
             ClientError,
-            'Server refused request as invalid: (no reason provided)',
           );
+
+          expect(error.message).toBe('Server refused request as invalid: (no reason provided)');
+          expect(error.statusCode).toBe(HTTP_STATUS_CODES.BAD_REQUEST);
         });
 
         test('Error should include problem type if present', async () => {
@@ -180,10 +183,13 @@ describe('AuthorityClient', () => {
           const response = new Response(JSON.stringify(responseBody), { status: 400 });
           mockFetch.mockResolvedValue(response);
 
-          await expect(client.send(new MockCommand(request))).rejects.toThrowWithMessage(
+          const error = await getPromiseRejection(
+            async () => client.send(new MockCommand(request)),
             ClientError,
-            `Server refused request as invalid: ${responseBody.type}`,
           );
+
+          expect(error.message).toBe(`Server refused request as invalid: ${responseBody.type}`);
+          expect(error.statusCode).toBe(HTTP_STATUS_CODES.BAD_REQUEST);
         });
 
         test('Error should include message if present', async () => {
@@ -192,10 +198,13 @@ describe('AuthorityClient', () => {
           const response = new Response(JSON.stringify(responseBody), { status: 400 });
           mockFetch.mockResolvedValue(response);
 
-          await expect(client.send(new MockCommand(request))).rejects.toThrowWithMessage(
+          const error = await getPromiseRejection(
+            async () => client.send(new MockCommand(request)),
             ClientError,
-            `Server refused request as invalid: ${responseBody.message}`,
           );
+
+          expect(error.message).toBe(`Server refused request as invalid: ${responseBody.message}`);
+          expect(error.statusCode).toBe(HTTP_STATUS_CODES.BAD_REQUEST);
         });
       });
 
@@ -203,20 +212,26 @@ describe('AuthorityClient', () => {
         const client = new AuthorityClient(baseUrl, authHeader);
         mockFetch.mockResolvedValue(new Response(null, { status: 401 }));
 
-        await expect(client.send(new MockCommand(request))).rejects.toThrowWithMessage(
+        const error = await getPromiseRejection(
+          async () => client.send(new MockCommand(request)),
           ClientError,
-          'Server refused access token',
         );
+
+        expect(error.message).toBe('Server refused access token');
+        expect(error.statusCode).toBe(HTTP_STATUS_CODES.UNAUTHORIZED);
       });
 
       test('403 response should throw ClientError', async () => {
         const client = new AuthorityClient(baseUrl, authHeader);
         mockFetch.mockResolvedValue(new Response(null, { status: 403 }));
 
-        await expect(client.send(new MockCommand(request))).rejects.toThrowWithMessage(
+        const error = await getPromiseRejection(
+          async () => client.send(new MockCommand(request)),
           ClientError,
-          'Server denied authorisation',
         );
+
+        expect(error.message).toBe('Server denied authorisation');
+        expect(error.statusCode).toBe(HTTP_STATUS_CODES.FORBIDDEN);
       });
 
       test.each([
