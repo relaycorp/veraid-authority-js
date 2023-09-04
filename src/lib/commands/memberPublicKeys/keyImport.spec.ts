@@ -17,6 +17,7 @@ const INPUT: MemberPublicKeyImportInput = {
 
 const OUTPUT: MemberPublicKeyImportOutput = {
   self: '/self',
+  bundle: '/bundle',
 };
 
 describe('MemberPublicKeyImportCommand', () => {

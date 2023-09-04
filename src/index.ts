@@ -18,3 +18,4 @@ export * from './lib/commands/memberPublicKeys/keyImport.js';
 export * from './lib/commands/memberKeyImportTokens/tokenCreation.js';
 
 export * from './lib/commands/DeletionCommand.js';
+export * from './lib/commands/RawRetrievalCommand.js';
