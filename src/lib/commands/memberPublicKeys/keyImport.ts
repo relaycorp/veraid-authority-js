@@ -9,8 +9,8 @@ import type { EndpointInput } from '../EndpointInput.js';
 
 const RESPONSE_SCHEMA = {
   type: 'object',
-  properties: { self: { type: 'string' } },
-  required: ['self'],
+  properties: { self: { type: 'string' }, bundle: { type: 'string' } },
+  required: ['self', 'bundle'],
 } as const;
 const RESPONSE_VALIDATOR = compileSchema(RESPONSE_SCHEMA);
 
