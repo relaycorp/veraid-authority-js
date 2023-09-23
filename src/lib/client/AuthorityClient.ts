@@ -84,6 +84,13 @@ export class AuthorityClient {
       throw new ClientError('Server denied authorisation', response.status);
     }
 
+    const isClientError =
+      HTTP_STATUS_CODES.BAD_REQUEST < response.status &&
+      response.status < HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR;
+    if (isClientError) {
+      throw new ClientError(`Unsupported status code (${response.status})`, response.status);
+    }
+
     throw new ServerError(`Unsupported status code (${response.status})`);
   }
 }

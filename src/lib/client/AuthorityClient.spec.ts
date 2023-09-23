@@ -234,9 +234,24 @@ describe('AuthorityClient', () => {
         expect(error.statusCode).toBe(HTTP_STATUS_CODES.FORBIDDEN);
       });
 
+      test.each([402, 404, 499])(
+        '%s response should be unsupported and throw ClientError',
+        async (status) => {
+          const client = new AuthorityClient(baseUrl, authHeader);
+          mockFetch.mockResolvedValue(new Response(null, { status }));
+
+          const error = await getPromiseRejection(
+            async () => client.send(new MockCommand(request)),
+            ClientError,
+          );
+
+          expect(error.message).toBe(`Unsupported status code (${status})`);
+          expect(error.statusCode).toBe(status);
+        },
+      );
+
       test.each([
         ['3XX', 300],
-        ['Other 4XX', 402],
         ['5XX', 500],
       ])('%s response should be unsupported and throw ServerError', async (_name, status) => {
         const client = new AuthorityClient(baseUrl, authHeader);
