@@ -1,6 +1,7 @@
 import { getJsonValue, makeJsonResponse } from '../../../testUtils/jsonSerialisation.js';
 import { ORG_NAME } from '../../../testUtils/stubs.js';
 import { SerialisationError } from '../../utils/serialisation/SerialisationError.js';
+import { derSerialisePublicKey, generatePublicKey } from '../../../testUtils/crypto.js';
 
 import {
   OrgCreationCommand,
@@ -10,18 +11,24 @@ import {
 
 const INPUT: OrgCreationInput = { name: ORG_NAME };
 
+const PUBLIC_KEY = await generatePublicKey();
 const OUTPUT: OrgCreationOutput = {
   self: `/orgs/${ORG_NAME}`,
   members: `/orgs/${ORG_NAME}/members`,
+  publicKey: PUBLIC_KEY,
+};
+const OUTPUT_SERIALISED = {
+  ...OUTPUT,
+  publicKey: await derSerialisePublicKey(OUTPUT.publicKey),
 };
 
 describe('OrgCreationCommand', () => {
   describe('responseDeserialiser', () => {
-    test.each<keyof typeof OUTPUT>(['self', 'members'])(
-      '%s URL path should be returned',
-      async (pathName) => {
+    test.each<keyof typeof OUTPUT_SERIALISED>(['self', 'members', 'publicKey'])(
+      '%s field should be returned',
+      async (name) => {
         const command = new OrgCreationCommand(INPUT);
-        const output = { ...OUTPUT, [pathName]: undefined };
+        const output = { ...OUTPUT, [name]: undefined };
         const response = makeJsonResponse(output);
 
         await expect(command.responseDeserialiser.deserialise(response)).rejects.toThrow(
@@ -32,11 +39,11 @@ describe('OrgCreationCommand', () => {
 
     test('Valid response body should be returned', async () => {
       const command = new OrgCreationCommand(INPUT);
-      const response = makeJsonResponse(OUTPUT);
+      const response = makeJsonResponse(OUTPUT_SERIALISED);
 
       const output = await command.responseDeserialiser.deserialise(response);
 
-      expect(output).toMatchObject(OUTPUT);
+      expect(output).toMatchObject(OUTPUT_SERIALISED);
     });
   });
 
@@ -81,7 +88,7 @@ describe('OrgCreationCommand', () => {
 
       const output = command.getOutput(OUTPUT);
 
-      expect(output).toBe(OUTPUT);
+      expect(output).toMatchObject(OUTPUT_SERIALISED);
     });
   });
 });
