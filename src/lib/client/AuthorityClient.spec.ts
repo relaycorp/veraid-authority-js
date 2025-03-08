@@ -15,6 +15,12 @@ beforeEach(() => {
   mockFetch.mockResolvedValue(new Response('{}'));
 });
 
+const mockAbortSignalTimeout = mockSpy(jest.spyOn(AbortSignal, 'timeout'));
+const mockTimeoutSignal = Symbol('mockTimeoutSignal');
+beforeEach(() => {
+  mockAbortSignalTimeout.mockReturnValue(mockTimeoutSignal as unknown as AbortSignal);
+});
+
 describe('AuthorityClient', () => {
   const baseUrl = 'https://api.veraid-authority.example';
   const authHeader: AuthorizationHeader = {
@@ -47,6 +53,58 @@ describe('AuthorityClient', () => {
         await client.send(new MockCommand(request));
 
         expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}${request.path}`, expect.anything());
+      });
+
+      test('Should time out after 3 seconds by default', async () => {
+        const client = new AuthorityClient(baseUrl, authHeader);
+
+        await client.send(new MockCommand(request));
+
+        expect(mockAbortSignalTimeout).toHaveBeenCalledWith(3000);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({ signal: mockTimeoutSignal }),
+        );
+      });
+
+      test('Should use client-level timeout if specified', async () => {
+        const clientTimeoutMs = 5000;
+        const client = new AuthorityClient(baseUrl, authHeader, { timeoutMs: clientTimeoutMs });
+
+        await client.send(new MockCommand(request));
+
+        expect(mockAbortSignalTimeout).toHaveBeenCalledWith(clientTimeoutMs);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({ signal: mockTimeoutSignal }),
+        );
+      });
+
+      test('Should time out after specified timeout if provided', async () => {
+        const client = new AuthorityClient(baseUrl, authHeader);
+        const timeoutMs = 1000;
+
+        await client.send(new MockCommand(request), { timeoutMs });
+
+        expect(mockAbortSignalTimeout).toHaveBeenCalledWith(timeoutMs);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({ signal: mockTimeoutSignal }),
+        );
+      });
+
+      test('Command-level timeout should override client-level timeout', async () => {
+        const clientTimeoutMs = 5000;
+        const commandTimeoutMs = 2000;
+        const client = new AuthorityClient(baseUrl, authHeader, { timeoutMs: clientTimeoutMs });
+
+        await client.send(new MockCommand(request), { timeoutMs: commandTimeoutMs });
+
+        expect(mockAbortSignalTimeout).toHaveBeenCalledWith(commandTimeoutMs);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({ signal: mockTimeoutSignal }),
+        );
       });
 
       test.each([

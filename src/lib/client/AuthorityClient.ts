@@ -1,5 +1,6 @@
 import type { Command } from '../commands/Command.js';
 import { HTTP_STATUS_CODES, type Request, type RequestBody } from '../utils/http.js';
+import type { CommandDespatchOptions } from '../commands/CommandDespatchOptions.js';
 
 import { ServerError } from './ServerError.js';
 import type { AuthorizationHeader } from './AuthorizationHeader.js';
@@ -7,6 +8,7 @@ import { ClientError } from './ClientError.js';
 
 const USER_AGENT = 'VeraId Authority Client (https://github.com/relaycorp/veraid-authority-js)';
 const JSON_CONTENT_TYPE = 'application/json';
+const DEFAULT_REQUEST_TIMEOUT_MS = 3000;
 
 interface BadRequestResponseBody {
   type?: string;
@@ -21,15 +23,23 @@ export class AuthorityClient {
 
   protected readonly authHeader: string;
 
+  protected readonly defaultOptions: CommandDespatchOptions;
+
   /**
    * @param baseUrl The base URL of the Authority server.
    * @param authHeader The `Authorization` header parameters.
+   * @param defaultOptions The default options for all requests.
    */
-  public constructor(baseUrl: string, authHeader: AuthorizationHeader) {
+  public constructor(
+    baseUrl: string,
+    authHeader: AuthorizationHeader,
+    defaultOptions: Partial<CommandDespatchOptions> = {},
+  ) {
     // eslint-disable-next-line regexp/no-super-linear-move
     this.baseUrl = baseUrl.replace(/\/+$/u, '');
 
     this.authHeader = `${authHeader.scheme} ${authHeader.parameters}`;
+    this.defaultOptions = { timeoutMs: defaultOptions.timeoutMs ?? DEFAULT_REQUEST_TIMEOUT_MS };
   }
 
   /**
@@ -41,13 +51,14 @@ export class AuthorityClient {
    */
   public async send<CommandOutput>(
     command: Command<unknown, CommandOutput, unknown>,
+    options: Partial<CommandDespatchOptions> = {},
   ): Promise<CommandOutput> {
     const request = command.getRequest();
-    const responsePayload = await this.makeRequest(request);
+    const responsePayload = await this.makeRequest(request, options.timeoutMs);
     return this.processResponse(responsePayload, command);
   }
 
-  private async makeRequest(request: Request<RequestBody>): Promise<Response> {
+  private async makeRequest(request: Request<RequestBody>, timeout?: number): Promise<Response> {
     const contentType = request.contentType ?? JSON_CONTENT_TYPE;
     const headers = new Headers([
       ['Authorization', this.authHeader],
@@ -57,7 +68,13 @@ export class AuthorityClient {
 
     const url = `${this.baseUrl}${request.path}`;
     const body = request.body?.serialise();
-    return fetch(url, { method: request.method, headers, body });
+    const timeoutMs = timeout ?? this.defaultOptions.timeoutMs;
+    return fetch(url, {
+      method: request.method,
+      headers,
+      body,
+      signal: AbortSignal.timeout(timeoutMs),
+    });
   }
 
   private async processResponse<CommandOutput>(
