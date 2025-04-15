@@ -35,6 +35,11 @@ export interface OrgCreationOutput {
    * Path to the newly-created organisation's members.
    */
   members: string;
+
+  /**
+   * Public key of the newly-created organisation.
+   */
+  publicKey: CryptoKey;
 }
 
 /**
