@@ -6,7 +6,7 @@ export { ClientError } from './lib/client/ClientError.js';
 export { ServerError } from './lib/client/ServerError.js';
 
 export { Command } from './lib/commands/Command.js';
-
+export type { CommandDespatchOptions } from './lib/commands/CommandDespatchOptions.js';
 export * from './lib/commands/orgs/orgCreation.js';
 
 export * from './lib/commands/members/memberCreation.js';
@@ -16,6 +16,8 @@ export { MemberRole } from './lib/commands/members/MemberRole.js';
 
 export * from './lib/commands/memberPublicKeys/keyImport.js';
 export * from './lib/commands/memberKeyImportTokens/tokenCreation.js';
+
+export * from './lib/commands/signatureSpecs/specCreation.js';
 
 export * from './lib/commands/DeletionCommand.js';
 export * from './lib/commands/RawRetrievalCommand.js';

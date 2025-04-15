@@ -15,6 +15,12 @@ beforeEach(() => {
   mockFetch.mockResolvedValue(new Response('{}'));
 });
 
+const mockAbortSignalTimeout = mockSpy(jest.spyOn(AbortSignal, 'timeout'));
+const mockTimeoutSignal = Symbol('mockTimeoutSignal');
+beforeEach(() => {
+  mockAbortSignalTimeout.mockReturnValue(mockTimeoutSignal as unknown as AbortSignal);
+});
+
 describe('AuthorityClient', () => {
   const baseUrl = 'https://api.veraid-authority.example';
   const authHeader: AuthorizationHeader = {
@@ -47,6 +53,58 @@ describe('AuthorityClient', () => {
         await client.send(new MockCommand(request));
 
         expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}${request.path}`, expect.anything());
+      });
+
+      test('Should time out after 3 seconds by default', async () => {
+        const client = new AuthorityClient(baseUrl, authHeader);
+
+        await client.send(new MockCommand(request));
+
+        expect(mockAbortSignalTimeout).toHaveBeenCalledWith(3000);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({ signal: mockTimeoutSignal }),
+        );
+      });
+
+      test('Should use client-level timeout if specified', async () => {
+        const clientTimeoutMs = 5000;
+        const client = new AuthorityClient(baseUrl, authHeader, { timeoutMs: clientTimeoutMs });
+
+        await client.send(new MockCommand(request));
+
+        expect(mockAbortSignalTimeout).toHaveBeenCalledWith(clientTimeoutMs);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({ signal: mockTimeoutSignal }),
+        );
+      });
+
+      test('Should time out after specified timeout if provided', async () => {
+        const client = new AuthorityClient(baseUrl, authHeader);
+        const timeoutMs = 1000;
+
+        await client.send(new MockCommand(request), { timeoutMs });
+
+        expect(mockAbortSignalTimeout).toHaveBeenCalledWith(timeoutMs);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({ signal: mockTimeoutSignal }),
+        );
+      });
+
+      test('Command-level timeout should override client-level timeout', async () => {
+        const clientTimeoutMs = 5000;
+        const commandTimeoutMs = 2000;
+        const client = new AuthorityClient(baseUrl, authHeader, { timeoutMs: clientTimeoutMs });
+
+        await client.send(new MockCommand(request), { timeoutMs: commandTimeoutMs });
+
+        expect(mockAbortSignalTimeout).toHaveBeenCalledWith(commandTimeoutMs);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({ signal: mockTimeoutSignal }),
+        );
       });
 
       test.each([
@@ -234,9 +292,24 @@ describe('AuthorityClient', () => {
         expect(error.statusCode).toBe(HTTP_STATUS_CODES.FORBIDDEN);
       });
 
+      test.each([402, 404, 499])(
+        '%s response should be unsupported and throw ClientError',
+        async (status) => {
+          const client = new AuthorityClient(baseUrl, authHeader);
+          mockFetch.mockResolvedValue(new Response(null, { status }));
+
+          const error = await getPromiseRejection(
+            async () => client.send(new MockCommand(request)),
+            ClientError,
+          );
+
+          expect(error.message).toBe(`Unsupported status code (${status})`);
+          expect(error.statusCode).toBe(status);
+        },
+      );
+
       test.each([
         ['3XX', 300],
-        ['Other 4XX', 402],
         ['5XX', 500],
       ])('%s response should be unsupported and throw ServerError', async (_name, status) => {
         const client = new AuthorityClient(baseUrl, authHeader);
