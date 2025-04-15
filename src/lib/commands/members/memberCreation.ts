@@ -16,9 +16,10 @@ const RESPONSE_SCHEMA = {
     self: { type: 'string' },
     publicKeys: { type: 'string' },
     publicKeyImportTokens: { type: 'string' },
+    signatureSpecs: { type: 'string' },
   },
 
-  required: ['self', 'publicKeys', 'publicKeyImportTokens'],
+  required: ['self', 'publicKeys', 'publicKeyImportTokens', 'signatureSpecs'],
 } as const;
 const RESPONSE_VALIDATOR = compileSchema(RESPONSE_SCHEMA);
 

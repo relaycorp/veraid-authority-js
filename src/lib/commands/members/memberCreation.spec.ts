@@ -18,6 +18,7 @@ const OUTPUT: MemberCreationOutput = {
   self: `/orgs/${ORG_NAME}/members/${USER_NAME}`,
   publicKeys: `/orgs/${ORG_NAME}/members/${USER_NAME}/publicKeys`,
   publicKeyImportTokens: `/orgs/${ORG_NAME}/members/${USER_NAME}/publicKeyImportTokens`,
+  signatureSpecs: `/orgs/${ORG_NAME}/members/${USER_NAME}/signature-specs`,
 };
 
 type MemberCreationRequestBody = Omit<MemberCreationInput, 'endpoint'>;
